@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block main_content %}
+
+<form action ="" method ="POST">
+    
+    {{ form.hidden_tag() }}
+    {{ form.activity.label }}
+    {{ form.activity() }}
+    {% for error in form.activity.errors %}
+    {{error}}
+    {% endfor %}
+    <br/>
+    {{ form.confirm.label }}
+    {{ form.confirm() }}
+    <br/>
+    {{ form.submit() }}
+    {{message}}
+</form>
+<table>
+    <caption>Activities in database</caption>
+    <th>Activity ID</th>
+    <th>Activity</th>
+    {% for rows in all_act %}
+    <tr>
+        <td>{{rows['id']}}</td>
+        <td>{{rows['activity']}}</td>
+    </tr>
+    {% endfor %}
+  
+</table>
+<p>If you would like add a new activity <a href="{{url_for('new_activity')}}">Click Here</a></p>
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block main_content %}
+<form action ="" method ="POST">
+    {{ form.hidden_tag() }}
+    {{ form.date.label}}
+    {{ form.date }}
+    {% for error in form.date.errors %}
+    {{error}}
+    {% endfor %}
+    <br/>
+    {{ form.time.label}}
+    {{ form.time }}
+    {% for error in form.time.errors %}
+    {{error}}
+    {% endfor %}
+    <br/>
+    {{ form.how_long.label }}
+    {{ form.how_long() }}
+    <br/>
+    {{ form.session_type.label }}
+    {{ form.session_type() }}
+    <br/>
+    {%if trainer %}
+    <form action ="" method ="POST">
+        {{ form2.hidden_tag() }}
+        {{ form2.trainer.label}}
+        {{ form2.trainer() }}
+        <br/>
+        {% if payment %}
+        <form action ="" method ="POST">
+            {{payment_message}}
+            <br/>
+            {{ form3.hidden_tag() }}
+            {{ form3.payment.label}}
+            {{ form3.payment() }}
+            <br/>
+            {% for error in form3.payment.errors %}
+            {{error}}
+            {% endfor %}
+            <br/>
+            {{ form3.confirm.label }}
+            {{ form3.confirm() }}
+            <br/>
+            {{ form3.submit() }}
+        </form>
+        {% else %}
+        {{ form2.submit() }}
+        {% endif %}
+    </form>
+    {% else %}
+
+    {{ form.submit() }}
+    {% endif %}
+</form>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block main_content %}
+<form action ="" method ="POST">
+    {{ form.hidden_tag() }}
+    {{ form.booking.label }}
+    {{ form.booking() }}
+    {% for error in form.booking.errors %}
+        {{error}}
+    {% endfor %}
+    
+    <br/>
+    {{ form.submit() }}
+
+</form>
+<p>{{message}}</p>
+{% endblock %}

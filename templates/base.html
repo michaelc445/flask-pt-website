@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>{% block title %} {% endblock %}</title>
+    <link rel ="stylesheet" href="{{ url_for('static', filename='styles.css') }}"/>
+    
+</head>
+
+<body>
+    
+    {% block header %}
+    {% endblock %}
+    <nav id=sidebar>
+        <h2>F.A.T</h2>
+        <ul>
+            <li><a href="{{ url_for('home')}}">Home</a></li>
+            {% if g.user %}
+            <li><a href="{{ url_for('profile')}}">Profile</a></li>
+            <li><a href="{{ url_for('booking')}}">Make a booking</a></li>
+            <li><a href="{{ url_for('cancel_booking')}}">Cancel Booking</a></li>
+            <li><a href="{{ url_for('reset_password')}}">Change Password</a></li>
+            <li><a href="{{ url_for('request_activity')}}">Request a new activity</a></li>
+            <li><a href="{{ url_for('logout')}}">Logout</a></li>
+            {% else %}
+            <li><a href="{{ url_for('register')}}">Register</a></li>
+            <li><a href="{{ url_for('login')}}">Login</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+    <section id="main_content">
+        {% block main_content %}
+        {% endblock %}
+    </section>
+    
+    <div id="empty-space" role = presentation>
+        
+    </div>
+    <footer>
+        <p>Michael Cronin © 2021</p>
+    </footer>
+</body>
+
+</html>

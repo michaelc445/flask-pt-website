@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block main_content %}
+<section id="profile_crap" >
+    <p>Hello {{g.username}}, welcome to your profile.</p>
+    <section id="cust_appointments">
+        {% if appointments %}
+            <p>Here's a list of your sessions booked with trainers</p>
+            <table>
+                <th>Session Type</th>
+                <th>Training date</th>
+                <th>Trainer</th>
+                {% for booking in appointments %}
+                <tr>
+                    <td>{{booking['session_type']}}</td>
+                    <td>{{booking['booking_date']}}</td>
+                    <td>{{booking['trainer']}}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        {% else %}
+            <p>You dont have any sessions with other trainers booked currently.</p>
+        {% endif %}
+    </section>
+    <p>If you would like to book a personal training session <a href="{{url_for('booking')}}">Click Here</a></p>
+    {% if trainer %}
+        <section id="customers_table">
+            {%if customers %}
+                <p>Here's a list of future bookings for your services</p>
+                <table>
+                    
+                    <th>Session Type</th>
+                    <th>Training date</th>
+                    <th>Client</th>
+                    {% for booking in customers %}
+                    <tr>
+                        <td>{{booking['session_type']}}</td>
+                        <td>{{booking['booking_date']}}</td>
+                        <td>{{booking['client']}}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+                <br/>
+                <p>If you would like to cancel a booking with a client <a href="{{url_for('trainer_cancel')}}">Click here</a></p>
+            {% else %}
+                <p>You don't have any clients currently.</p>
+            {% endif %}
+        </section>
+        <section id="trainer_table">
+            {%if chosen_dict %}
+                <p>Here are the activity's that you're a trainer for</p>
+                <table>
+                    
+                    <th>Activity</th>
+                    <th>Your price</th>
+                    {% for items in chosen_dict %}
+                    <tr>
+                        <td>{{ items['activity'] }}</td>
+                        <td>€{{ items['price'] }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            {% else %}
+                <p>You're not an instructor for anything yet</p>
+            {% endif %}
+        </section>
+        <p>If you would like to change your training preferences <a href="{{url_for('preferences')}}">Click Here</a></p>
+        <p>Changing your preferences will not cancel bookings already in place.</p>
+    {% endif %}
+
+    {% if admin %}
+        <p>If you would like to delete an activity from the website <a href="{{url_for('remove_activity')}}">Click Here</a></p>
+        <p>If you would like to add an activity to the website <a href="{{url_for('new_activity')}}">Click Here</a></p>
+    {% endif %}
+</section>
+{% endblock %}

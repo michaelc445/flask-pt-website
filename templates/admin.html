@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+
+{% block main_content %}
+<section id="admin">
+<table>
+    <caption>Users in database</caption>
+    <th>User ID</th>
+    <th>Username</th>
+    <th>User Type</th>
+    {% for items in users %}
+    <tr>
+        <td>{{ items['user_id'] }}</td>
+        <td>{{ items['username'] }}</td>
+        <td>{{ items['usertype'] }}</td>
+    </tr>
+    {% endfor %}
+</table>
+<table>
+    <caption>All Bookings</caption>
+    <th>Trainer</th>
+    <th>Client</th>
+    <th>Activity</th>
+    <th>Date</th>
+    {% for items in bookings %}
+    <tr>
+        <td>{{ items['trainer'] }}</td>
+        <td>{{ items['client'] }}</td>
+        <td>{{ items['activity'] }}</td>
+        <td>{{ items['date'] }}</td>
+    </tr>
+    {% endfor %}
+</table>
+<p>If you would like to go back to your profile <a href="{{url_for('profile')}}">Click Here</a></p>
+</section>
+{% endblock %}

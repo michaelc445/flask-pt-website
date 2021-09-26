@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block main_content %}
+
+<form action ="" method ="POST">
+
+    {{ form.hidden_tag() }}
+    {{ form.activity.label }}
+    {{ form.activity() }}
+    {% for error in form.activity.errors %}
+    {{error}}
+    {% endfor %}
+    
+    <br/>
+    
+    {{ form.submit() }}
+
+</form>
+
+
+    
+    <p>Requested activities</p>
+    <ol>
+    {% for rows in requested %}
+    
+        <li>{{rows['activity']}}</li>
+    
+    {% endfor %}
+    </ol>
+
+<table>
+    <caption>Activities in database</caption>
+    <th>Activity ID</th>
+    <th>Activity</th>
+    {% for rows in all_act %}
+    <tr>
+        <td>{{rows['id']}}</td>
+        <td>{{rows['activity']}}</td>
+    </tr>
+    {% endfor %}
+    {{message}}
+</table>
+<p>If you would like delete an existing activity <a href="{{url_for('remove_activity')}}">Click Here</a></p>
+{% endblock %}

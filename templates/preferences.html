@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+
+{% block main_content %}
+<form action ="" method ="POST">
+
+    {{ form.hidden_tag() }}
+    {{ form.available.label }}
+    {{ form.available() }}
+    {{ form.price.label }}
+    {{ form.price() }}
+    {% for error in form.price.errors %} 
+    {{error}}
+    {% endfor %}
+    <br/>
+    {{ form.chosen.label }}
+    {{ form.chosen() }}
+    <br/>
+    
+    {{ form.submit() }}
+    {{message}}
+
+</form>
+<p>If you would like to go back to your profile <a href="{{url_for('profile')}}">Click Here</a></p>
+{% endblock %}

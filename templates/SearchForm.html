@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block main_content %}
+
+<form action ="" method ="POST">
+    {{ form.hidden_tag() }}
+    {{ form.activity.label }}
+    {{ form.activity() }}
+    {% for error in form.activity.errors %}
+    {{error}}
+    {% endfor %}
+    <br/>
+    {{ form.search() }}
+</form>
+<table>
+    <caption>We found this.</caption>
+    <th>Activity ID</th>
+    <th>Activity</th>
+    <tr>
+        <td>{{rows['id']}}</td>
+        <td>{{rows['activity']}}</td>
+    </tr>
+</table>
+{% endblock %}
